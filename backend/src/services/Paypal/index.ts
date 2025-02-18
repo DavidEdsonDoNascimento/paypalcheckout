@@ -51,11 +51,14 @@ export class PayPalService {
 		input_order: PaypalOrderInput,
 		attempt = 1
 	): Promise<PaypalOrder> {
+
 		console.log('Chamada | Criar pedido | qt tentativas:', attempt);
+		
 		if (attempt > 3) {
 			console.log('*Falha | Chamada | Criar pedido | qt tentativas:', attempt);
       throw new Error('Failed to create order after multiple attempts');
     }
+
 		try {
 			const url = `${PAYPAL_API_BASE_URL}/v2/checkout/orders`;
 			const headers = new Headers();
@@ -71,6 +74,8 @@ export class PayPalService {
 				purchase_units,
 			};
 
+			console.log('Chamada | Criar pedido | Payload:', payload);
+
 			const response = await fetch(url, {
 				method: 'POST',
 				headers,
@@ -85,6 +90,8 @@ export class PayPalService {
 
 			const result = (await response.json()) as PaypalOrder;
 
+			console.log('Chamada | Criar pedido | Resultado:', result);
+			
 			return result;
 		} catch (error) {
 			console.error('Error creating order', error);

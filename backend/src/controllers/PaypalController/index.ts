@@ -13,7 +13,7 @@ export class PaypalController {
 
       const [, token] = authorization.split(' ');
 
-			const result = PayPalService.createOrder(token, {
+			const result = await PayPalService.createOrder(token, {
 				intent,
 				payment_source,
 				purchase_units,

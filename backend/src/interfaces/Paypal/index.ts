@@ -5,8 +5,9 @@ export type PaypalOrderRequest = {
 }
 
 export type PaypalOrderInput = {
-  shippingAddress: any;
-  paymentToken: any;
+  intent: string;
+  payment_source: any;
+  purchase_units: any[];
 }
 
 type PaypalPurchaseUnitRequest = {
